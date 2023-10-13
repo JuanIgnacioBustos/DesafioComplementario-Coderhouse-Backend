@@ -10,5 +10,7 @@ export default {
     GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
     GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
     JWT_SECRET: process.env.JWT_SECRET,
-    ENVIRONMENT: process.env.ENVIRONMENT
+    ENVIRONMENT: process.env.ENVIRONMENT,
+    MAIL_APP: process.env.MAIL_APP,
+    MAIL_APP_PASSWORD: process.env.MAIL_APP_PASSWORD
 }

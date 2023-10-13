@@ -17,7 +17,7 @@ form.addEventListener('submit', e => {
         if (result.status === 200) {
             Swal.fire({
                 icon: 'success',
-                title: 'Link for restoring your password has been sent',
+                title: 'Email for restoring your password has been sent',
                 toast: true,
                 position: 'top-end',
                 showConfirmButton: false,

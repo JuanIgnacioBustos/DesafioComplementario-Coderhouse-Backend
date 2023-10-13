@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import config from "../config.js";
 import UserService from "../services/user.service.js";
 import CurrentUserDTO from "./DTO/user.dto.js";
+import Mail from "../helpers/mail.js";
 
 const userService = new UserService()
 
@@ -55,28 +56,40 @@ const resetPassword = async (req, res) => {
 }
 
 const requestResetPassword = async (req, res) => {
-    // const {email} = req.body;
+    const {email} = req.body;
 
-    // if (!email) {
-    //   return res.status(400).send({status: "error", error: "Incomplete values"});
-    // }
+    if (!email) {
+        return res.status(400).send({status: "error", error: "Incomplete values"});
+    }
 
-    // try {
+    try {
 
-    //   const user = await userService.findUser(email)
+        const user = await userService.findUser(email)
 
-    //   if (!user) {
-    //     return res.status(404).send({status: "error", message: "There is no user with such email"})
-    //   }
+        if (!user) {
+        return res.status(404).send({status: "error", message: "There is no user with such email"})
+        }
 
-    //   let token = jwt.sign({email}, config.JWT_SECRET, {expiresIn: '1h'}) // Este token va a durar 1 hora
+        let token = jwt.sign({email}, config.JWT_SECRET, {expiresIn: '1h'}) // Este token va a durar 1 hora
 
-    //   return res.send({status: "success", message: "Password updated"});
-    // }
-    // catch(error) {
-    //   return res.status(404).send({status: "error", error: error.message});
-    // }
-    res.send("Placeholder")
+        let mail = new Mail()
+
+        let result = await mail.send(
+        user,
+        "Password reset",
+        `
+        <div style='color: blue'>
+            <h1> Restaura tu email haciendo click en el siguiente link </h1>
+            http://localhost:8080/resetPassword?token=${token}
+        </div>
+        `
+        )
+
+        return res.send({status: "success", message: "Email sent"});
+    }
+    catch(error) {
+        return res.status(404).send({status: "error", error: error.message});
+    }
 }
 
 const github = async (req, res) => {
