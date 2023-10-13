@@ -26,6 +26,8 @@ router.post('/logout', sessionController.logout)
 
 router.post('/resetPassword', sessionController.resetPassword)
 
+router.post('/requestResetPassword', sessionController.requestResetPassword)
+
 // github routes
 
 router.get(

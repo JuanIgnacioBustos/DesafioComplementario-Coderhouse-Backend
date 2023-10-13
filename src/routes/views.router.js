@@ -20,4 +20,6 @@ router.get('/register', viewsController.register)
 
 router.get('/resetPassword', viewsController.resetPassword)
 
+router.get('/requestResetPassword', viewsController.requestResetPassword)
+
 export default router;

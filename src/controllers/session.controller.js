@@ -54,10 +54,35 @@ const resetPassword = async (req, res) => {
     }
 }
 
+const requestResetPassword = async (req, res) => {
+    // const {email} = req.body;
+
+    // if (!email) {
+    //   return res.status(400).send({status: "error", error: "Incomplete values"});
+    // }
+
+    // try {
+
+    //   const user = await userService.findUser(email)
+
+    //   if (!user) {
+    //     return res.status(404).send({status: "error", message: "There is no user with such email"})
+    //   }
+
+    //   let token = jwt.sign({email}, config.JWT_SECRET, {expiresIn: '1h'}) // Este token va a durar 1 hora
+
+    //   return res.send({status: "success", message: "Password updated"});
+    // }
+    // catch(error) {
+    //   return res.status(404).send({status: "error", error: error.message});
+    // }
+    res.send("Placeholder")
+}
+
 const github = async (req, res) => {
-// Vacio (es lo que mandamos a llamar desde el front)
-// Es para que pase por el middleware, y en cuanto se pueda acceder al perfil, passport
-// envia la info hacia el callback especificado
+    // Vacio (es lo que mandamos a llamar desde el front)
+    // Es para que pase por el middleware, y en cuanto se pueda acceder al perfil, passport
+    // envia la info hacia el callback especificado
 }
 
 const githubcallback = async (req, res) => {
@@ -88,6 +113,7 @@ export default {
     loginFail,
     logout,
     resetPassword,
+    requestResetPassword,
     github,
     githubcallback,
     current
