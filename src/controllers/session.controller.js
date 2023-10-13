@@ -1,4 +1,4 @@
-import { createHash } from "../utils.js";
+import { createHash, validatePassword } from "../utils.js";
 import jwt from "jsonwebtoken";
 import config from "../config.js";
 import UserService from "../services/user.service.js";
@@ -44,6 +44,11 @@ const resetPassword = async (req, res) => {
     }
 
     try {
+        const user = await userService.findUser(email)
+        if (validatePassword(password, user)) {
+        return res.status(400).send({status: "failure", error: "New and old password are the same"})
+        }
+
         const newHashedPassword = createHash(password);
 
         await userService.updatePassword(email, newHashedPassword)
@@ -53,9 +58,9 @@ const resetPassword = async (req, res) => {
     catch(error) {
         return res.status(404).send({status: "error", error: error.message});
     }
-    }
+}
 
-    const requestResetPassword = async (req, res) => {
+const requestResetPassword = async (req, res) => {
     const {email} = req.body;
 
     if (!email) {
@@ -75,7 +80,7 @@ const resetPassword = async (req, res) => {
 
         let mail = new Mail()
 
-        let result = await mail.send(
+        await mail.send(
         user,
         "Password reset",
         `
