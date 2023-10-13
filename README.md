@@ -1,3 +1,3 @@
-Desafio Implementacion de Logger - Coderhouse
+Desafio Complementario - Coderhouse
 
 Juan Ignacio Bustos
