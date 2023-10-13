@@ -18,7 +18,11 @@ router.get('/login', viewsController.login)
 
 router.get('/register', viewsController.register)
 
-router.get('/resetPassword', viewsController.resetPassword)
+router.get(
+    '/resetPassword',
+    passport.authenticate('jwtRequestPassword', {session: false, failureRedirect: 'requestResetPassword'}),
+    viewsController.resetPassword
+)
 
 router.get('/requestResetPassword', viewsController.requestResetPassword)
 

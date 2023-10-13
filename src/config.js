@@ -12,5 +12,6 @@ export default {
     JWT_SECRET: process.env.JWT_SECRET,
     ENVIRONMENT: process.env.ENVIRONMENT,
     MAIL_APP: process.env.MAIL_APP,
-    MAIL_APP_PASSWORD: process.env.MAIL_APP_PASSWORD
+    MAIL_APP_PASSWORD: process.env.MAIL_APP_PASSWORD,
+    JWT_PASSWORD_REQUEST: process.env.JWT_PASSWORD_REQUEST
 }

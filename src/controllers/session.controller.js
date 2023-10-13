@@ -53,9 +53,9 @@ const resetPassword = async (req, res) => {
     catch(error) {
         return res.status(404).send({status: "error", error: error.message});
     }
-}
+    }
 
-const requestResetPassword = async (req, res) => {
+    const requestResetPassword = async (req, res) => {
     const {email} = req.body;
 
     if (!email) {
@@ -70,7 +70,8 @@ const requestResetPassword = async (req, res) => {
         return res.status(404).send({status: "error", message: "There is no user with such email"})
         }
 
-        let token = jwt.sign({email}, config.JWT_SECRET, {expiresIn: '1h'}) // Este token va a durar 1 hora
+        // Este token va a durar 1 hora
+        let token = jwt.sign({email}, config.JWT_PASSWORD_REQUEST, {expiresIn: '1h'}) 
 
         let mail = new Mail()
 
